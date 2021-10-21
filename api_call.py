@@ -7,4 +7,4 @@ x = requests.post(url = url, data = myobj)
 
 #print the response text (the content of the requested file):
 
-print(x.content)
+print(x.text)
