@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title> Timepass coins transactions </title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body class='w3-light-gray'>
+    <div id='header'>
+        <header class='w3-text-teal w3-xlarge w3-padding w3-center'>
+            Timepass coins
+        </header>
+    </div>
+    <div id='status'>
+        <div class='w3-row w3-white'>
+            <div class='w3-half'>
+                <div class='w3-padding w3-center'>
+                    <div class='w3-padding w3-border-bottom'>
+                        <i class='fa fa-cubes'></i> No. of blocks mined
+                    </div>
+                    <div class='w3-margin' id='blocks_count'>#23</div>
+                </div>
+            </div>
+            <div class='w3-half'>
+                <div class='w3-padding w3-center'>
+                    <div class='w3-padding w3-border-bottom'>
+                        <i class='fa fa-map-marker'></i> Node address
+                    </div>
+                    <div class='w3-margin' id='node_address'> gfbh8uy289dhiuh893hceeuiy893</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='add transactions'>
+        <div class='w3-content'>
+            <div class='w3-margin w3-padding w3-round w3-white w3-center'>
+                <div class='w3-large'>
+                    Send crypto to the anyone
+                </div>
+                <div class='w3-section'>
+                    <input type="text" class='w3-input w3-round w3-border' placeholder="amount of crypto">
+                </div>
+                <div class='w3-section'>
+                    <button class='w3-button w3-round w3-teal kel-hover'> <i class='fa fa-plus'></i> Add </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='transactions list'>
+        <div class='w3-content'>
+            <div class='w3-margin w3-padding w3-round w3-white'>
+                <div class='w3-large w3-center'>
+                    Transactions
+                </div>
+                <div class='w3-section'>
+                    <table class='w3-table-all'>
+                        <tr class='w3-teal'>
+                            <th>
+                                From
+                            </th>
+                            <th>
+                                To
+                            </th>
+                            <th>
+                                Amount
+                            </th>
+                            <th>
+                                Time
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'index.js' %}"></script>
+</body>
+</html>

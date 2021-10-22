@@ -6,31 +6,35 @@ from uuid import uuid4
 import socket
 from urllib.parse import urlparse
 from django.http import JsonResponse, HttpResponse, HttpRequest
-from django.views.decorators.csrf import csrf_exempt #New
+from django.views.decorators.csrf import csrf_exempt
 
-
+# Blockchain class
 class Blockchain:
 
+    # Initializing blockchain object
     def __init__(self):
         self.chain = []
-        self.transactions = [] #New
+        self.transactions = []
         self.create_block(nonce = 1, previous_hash = '0')
-        self.nodes = set() #New
+        self.nodes = set()
 
+    # Create block method
     def create_block(self, nonce, previous_hash):
         block = {'index': len(self.chain) + 1,
                  'timestamp': str(datetime.datetime.now()),
                  'nonce': nonce,
                  'previous_hash': previous_hash,
-                 'transactions': self.transactions #New
+                 'transactions': self.transactions
                 }
-        self.transactions = [] #New
+        self.transactions = []
         self.chain.append(block)
         return block
 
+    # Bring the previous block of the chain
     def get_last_block(self):
         return self.chain[-1]
 
+    # Proof of work for new nonce
     def proof_of_work(self, previous_nonce):
         new_nonce = 1
         check_nonce = False
@@ -42,10 +46,12 @@ class Blockchain:
                 new_nonce += 1
         return new_nonce
 
+    # Hashing of block
     def hash(self, block):
         encoded_block = json.dumps(block, sort_keys = True).encode()
         return hashlib.sha256(encoded_block).hexdigest()
 
+    # Checking the chain validity
     def is_chain_valid(self, chain):
         previous_block = chain[0]
         block_index = 1
@@ -62,7 +68,8 @@ class Blockchain:
             block_index += 1
         return True
 
-    def add_transaction(self, sender, receiver, amount, time): #New
+    # adding transaction
+    def add_transaction(self, sender, receiver, amount, time):
         self.transactions.append({'sender': sender,
                                   'receiver': receiver,
                                   'amount': amount,
@@ -70,12 +77,13 @@ class Blockchain:
         previous_block = self.get_last_block()
         return previous_block['index'] + 1
 
-    def add_node(self, address): #New
+    # Adding new node to the blockchain
+    def add_node(self, address): 
         parsed_url = urlparse(address)
         self.nodes.add(parsed_url.netloc)
 
-
-    def replace_chain(self): #New
+    # Replacing node's blockchain with longest chain availabel in the network
+    def replace_chain(self): 
         network = self.nodes
         longest_chain = None
         max_length = len(self.chain)
@@ -97,6 +105,7 @@ class Blockchain:
 blockchain = Blockchain()
 # Creating an address for the node running our server
 node_address = str(uuid4()).replace('-', '') #New
+print(node_address)
 root_node = 'e36f0158f0aed45b3bc755dc52ed4560d' #New
 
 # Mining a new block
